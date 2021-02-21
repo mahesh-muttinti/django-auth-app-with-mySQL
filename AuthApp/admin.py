@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Registers)
 admin.site.register(Login)
+admin.site.register(Posts)

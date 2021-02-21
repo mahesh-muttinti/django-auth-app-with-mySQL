@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+</head>
+<body>
+    <h1>{{ user.username }}</h1>
+    {% if user.is_authenticated %}
+        <!-- {{ request.user }} is same as {{ user.username }} -->
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <!-- List the all Posts regarding... -->
+        {% for data in dataset %}
+            <h2>{{ data.title }}</h2>
+            <p>{{ data.description }}</p>
+            <hr/>
+        {% endfor %}
+    {% else %}
+        You have to login to access these posts
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    
+</body>
+</html>

@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
-<body>
-    <h1>Hi {{ user.username }}</h1>
-    <h2>Welcome to the Static Page</h2>
+    {% if user.is_authenticated %}
+        <h1>Hi {{ user.username }}</h1>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{%url 'logout' %}">Logout</a>
+        <!-- you have to create forms when login, logout, register API's -->
+        <h2>Create a Post: </h2>
+        <form method="POST" enctype="multipart/form-data">
+            <!-- Security Token -->
+            {% csrf_token %}
+            <!-- using form set -->
+            {{ form }}
+            <input type="text" name="title" placeholder="Title"><br />
+            <input type="text" name="description" placeholder="Description"><br />
+            <button>Post</button>
+        </form>
+    {% else %}
+        You have to login to access your profile page
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
 </body>
 </html>
